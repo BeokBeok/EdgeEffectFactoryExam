@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.dynamicanimation.animation.SpringAnimation
+import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.RecyclerView
 
 class BaseViewHolder(
@@ -18,6 +20,14 @@ class BaseViewHolder(
 ) {
 
     private val binding: ViewDataBinding = DataBindingUtil.bind(itemView)!!
+    private var currentVelocity = 0f
+    val translationY: SpringAnimation = SpringAnimation(itemView, SpringAnimation.TRANSLATION_Y)
+        .setSpring(
+            SpringForce()
+                .setFinalPosition(0f)
+                .setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY)
+                .setStiffness(SpringForce.STIFFNESS_LOW)
+        )
 
     fun bind(item: Any?) {
         if (item == null) return

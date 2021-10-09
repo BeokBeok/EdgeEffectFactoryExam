@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         ).apply {
             submitList(dummyItemGroup.toList())
         }
+        binding.rvMain.edgeEffectFactory = BaseEdgeEffectFactory()
     }
 
     private fun setupBinding() {
